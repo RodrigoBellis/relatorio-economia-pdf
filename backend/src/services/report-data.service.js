@@ -1,6 +1,7 @@
 import { CAMPOS } from "../config/extraction-patterns.js";
 import {
   extrairCampo,
+  extrairCodigoInstalacao,
   extrairPrimeiroNumeroAposRotulo,
   extrairValorMonetarioAposRotulo,
   limparValor,
@@ -47,6 +48,12 @@ export const extrairDadosDoRelatorio = (texto, opcoes = {}) => {
       textoNormalizado,
       /Periodo\s+Referente/i
     );
+  }
+  // Extracao robusta do codigo de instalacao: aceita "Instalacao - Casa",
+  // "Codigo de instalacao", "Unidade consumidora" e numeros com/sem pontuacao.
+  const codigoInstalacao = extrairCodigoInstalacao(texto);
+  if (codigoInstalacao) {
+    dados.instalacao = codigoInstalacao;
   }
   if (!dados.instalacao) {
     dados.instalacao = extrairPrimeiroNumeroAposRotulo(

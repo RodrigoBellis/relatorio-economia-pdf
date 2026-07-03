@@ -1,4 +1,5 @@
 export const CAMPOS = {
+  id_conta: /ID\s+Conta[\s:]*([0-9]+)/i,
   periodo: /Periodo\s+Referente[\s:]*([0-9]{2}\/[0-9]{4})/i,
   instalacao: /Numero\s+Instalacao[\s:]*([0-9][0-9.\-]*)/i,
   cliente: /Cliente[\s:]*([^\n\r]+)/i,
